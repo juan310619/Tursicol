@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sugerir Lugares - TurisCol</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="prototipo_turismo/css/style.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="nav-wrapper container">
+        <a href="index.html" class="brand-logo"><i class="material-icons">travel_explore</i>TurisCol</a>
+        <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="index.html">Destinos</a></li>
+          <li><a href="itinerario.html">Mi Itinerario</a></li>
+          <li class="active"><a href="sugerencias.html">Sugerencias</a></li>
+          <li><a href="perfil.html">Perfil</a></li>
+        </ul>
+      </div>
+    </nav>
+    <ul class="sidenav" id="mobile-nav">
+      <li><a href="index.html">Destinos</a></li>
+      <li><a href="itinerario.html">Mi Itinerario</a></li>
+      <li class="active"><a href="sugerencias.html">Sugerencias</a></li>
+      <li><a href="perfil.html">Perfil</a></li>
+    </ul>
+  </header>
+
+  <main class="container">
+    <h1 class="center-align" style="font-size: 2.5rem; margin-top: 30px;">Tus Recomendaciones</h1>
+    <p class="center-align grey-text">Comparte lugares mágicos de Colombia que otros viajeros deban conocer.</p>
+
+    <div class="row" id="sugerencia-container" style="margin-top: 40px;">
+      <div class="col s12 m8 offset-m2">
+        <div class="form-container">
+          <form id="sugerencia-form">
+            <input type="hidden" id="sugerencia-id">
+            <div class="input-field">
+              <i class="material-icons prefix">place</i>
+              <input type="text" id="nombre_lugar" required aria-required="true">
+              <label for="nombre_lugar">Nombre del lugar</label>
+            </div>
+            
+            <div class="input-field">
+              <i class="material-icons prefix">map</i>
+              <input type="text" id="ubicacion" required aria-required="true">
+              <label for="ubicacion">Ciudad / Departamento</label>
+            </div>
+
+            <div class="input-field">
+              <i class="material-icons prefix">description</i>
+              <textarea id="descripcion" class="materialize-textarea" data-length="120" required aria-required="true"></textarea>
+              <label for="descripcion">Breve descripción del atractivo</label>
+            </div>
+
+            <button id="btn-save-sugerencia" class="btn waves-effect waves-light w-100 orange darken-2" type="submit">
+              Enviar Sugerencia
+              <i class="material-icons right">send</i>
+            </button>
+            <button id="btn-cancel-sugg" class="btn-flat white-text waves-effect w-100" type="button" style="margin-top: 10px; display: none;" onclick="resetSugerenciaForm()">
+              Cancelar Edición
+            </button>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <section class="container" style="margin-top: 60px; margin-bottom: 60px;">
+    <h3 class="center-align" style="font-weight: 300;">Explora Recomendaciones</h3>
+    <div id="muro-sugerencias" class="row">
+        <!-- Se cargará vía JS -->
+    </div>
+  </section>
+
+  <footer class="page-footer grey darken-4" style="border-top: 1px solid #333;">
+    <div class="footer-copyright">
+      <div class="container center-align">© 2026 TurisCol - Profesional</div>
+    </div>
+  </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="prototipo_turismo/js/auth.js"></script>
+  <script src="prototipo_turismo/js/ui.js"></script>
+  <script>
+    if (!auth.isAuthenticated()) {
+        showAuthMessage('sugerencia-container', '¡Comparte tus Rincones!', 'Ayúdanos a descubrir lugares mágicos. Regístrate para enviar tus recomendaciones y colaborar con otros viajeros.');
+    }
+  </script>
+  <script src="prototipo_turismo/js/app.js"></script>
+</body>
+</html>

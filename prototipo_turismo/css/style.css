@@ -1,0 +1,153 @@
+/* Tema Oscuro Premium TurisCol */
+:root {
+  --primary-color: #00796b;
+  --secondary-color: #f57c00;
+  --bg-dark: #121212;
+  --bg-card: #1e1e1e;
+  --text-main: #e0e0e0;
+  --text-muted: #b0b0b0;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  font-family: 'Roboto', sans-serif;
+}
+
+nav {
+  background-color: var(--primary-color) !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+.brand-logo {
+  font-weight: 300 !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #ffffff;
+  text-align: center; /* Centrar títulos por defecto */
+}
+
+.card {
+  background-color: var(--bg-card);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
+  border: 1px solid rgba(255,255,255,0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%; /* Asegura que la columna use toda la altura si el contenedor es flex */
+  display: flex;
+  flex-direction: column;
+}
+
+.card .card-image {
+  height: 250px; /* Altura optimizada */
+  overflow: hidden;
+}
+
+.card .card-image img {
+  height: 100% !important;
+  width: 100%;
+  object-fit: cover;
+}
+
+@media only screen and (max-width: 600px) {
+  .section-header { padding: 60px 10px; }
+  .section-header h1 { font-size: 2.4rem !important; }
+  .card .card-image { height: 200px; }
+}
+
+.card .card-content {
+  flex-grow: 1; /* Rellena el espacio sobrante */
+  color: var(--text-main);
+}
+
+.card .card-title {
+  font-weight: 500;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+}
+
+.input-field input, .input-field textarea {
+  color: white !important;
+}
+
+.input-field label {
+  color: var(--text-muted) !important;
+}
+
+.input-field input:focus + label, .input-field textarea:focus + label {
+  color: var(--primary-color) !important;
+}
+
+.collection {
+  border: none;
+  background: transparent;
+}
+
+.collection .collection-item {
+  background-color: #252525;
+  border-bottom: 1px solid #333;
+  color: white;
+}
+
+.modal {
+  background-color: var(--bg-card);
+  color: white;
+}
+
+.modal .modal-footer {
+  background-color: #252525;
+}
+
+.btn, .btn-large {
+  border-radius: 30px;
+  text-transform: none;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.animated {
+  animation-duration: 0.8s;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translate3d(0, -30px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+.fadeInDown { animation-name: fadeInDown; }
+
+/* Mensaje de Autenticación */
+.auth-message-card {
+  background: #1a1a1a !important;
+  border: 1px solid #333;
+}
+
+/* Header image centering fix */
+.section-header {
+    position: relative;
+    text-align: center;
+    padding: 120px 20px;
+    background-color: #000; /* Fallback */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 450px;
+}
+
+.section-header::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.7)), 
+                      url('../img/fotobanner.jpeg');
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+}
+
+.section-header .container {
+    position: relative;
+    z-index: 1;
+}

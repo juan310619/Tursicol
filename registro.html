@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - TurisCol</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="prototipo_turismo/css/style.css">
+    <style>
+        main { flex: 1 0 auto; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .login-card { width: 100%; max-width: 450px; padding: 2rem; }
+    </style>
+</head>
+<body>
+    <header>
+        <nav><div class="nav-wrapper container"><a href="index.html" class="brand-logo"><i class="material-icons">travel_explore</i>TurisCol</a>
+        <ul class="right hide-on-med-and-down"><li><a href="index.html">Destinos</a></li></ul></div></nav>
+    </header>
+    <main>
+        <div class="login-card card animated fadeInDown" style="border-top: 5px solid #ff9800;">
+            <h4 class="center-align orange-text text-darken-3" style="font-weight: 300;">Crear Cuenta</h4>
+            <p class="center-align grey-text">Únete a la red segura de viajeros</p>
+            <form id="register-form">
+                <div class="input-field"><i class="material-icons prefix">person</i><input id="name" type="text" class="validate" required><label for="name">Nombre Completo</label></div>
+                <div class="input-field"><i class="material-icons prefix">email</i><input id="email" type="email" class="validate" required><label for="email">Correo Electrónico</label></div>
+                <div class="input-field"><i class="material-icons prefix">lock</i><input id="password" type="password" class="validate" required minlength="6"><label for="password">Contraseña (mín. 6)</label></div>
+                <button class="btn waves-effect waves-light w-100 orange darken-2" type="submit" style="width: 100%; margin-top: 1rem;">Registrarse</button>
+            </form>
+            <p class="center-align" style="margin-top: 2rem;">¿Ya tienes cuenta? <a href="login.html" class="teal-text">Inicia Sesión</a></p>
+        </div>
+    </main>
+    <footer class="page-footer grey darken-4"><div class="footer-copyright"><div class="container center-align">© 2026 TurisCol</div></div></footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="prototipo_turismo/js/auth.js"></script>
+    <script src="prototipo_turismo/js/ui.js"></script>
+    <script>
+        document.getElementById('register-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            try {
+                const res = await auth.fetch('/users', { method: 'POST', body: JSON.stringify({ name, email, password }) });
+                const data = await res.json();
+                if (res.ok) {
+                    M.toast({html: 'Registro exitoso!', classes: 'green'});
+                    setTimeout(() => window.location.href = 'login.html', 1500);
+                } else {
+                    const msg = data.errors ? data.errors[0].msg : (data.message || 'Error');
+                    M.toast({html: msg, classes: 'red'});
+                }
+            } catch (err) { M.toast({html: 'Error de conexión: Revisa si el servidor está corriendo', classes: 'red'}); }
+        });
+    </script>
+</body>
+</html>

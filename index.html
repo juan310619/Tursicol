@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Turismo Colombia - Inicio</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="prototipo_turismo/css/style.css">
+</head>
+
+<body>
+
+  <!-- USO DE MATERIAL DESIGN: Clases Navbar, Container, y Grid -->
+
+  <header>
+    <nav>
+      <div class="nav-wrapper container">
+        <a href="index.html" class="brand-logo"><i class="material-icons">travel_explore</i>TurisCol</a>
+        <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="index.html">Destinos</a></li>
+          <li><a href="itinerario.html">Mi Itinerario</a></li>
+          <li><a href="sugerencias.html">Sugerencias</a></li>
+          <li><a href="perfil.html">Perfil</a></li>
+        </ul>
+      </div>
+    </nav>
+    <ul class="sidenav" id="mobile-nav">
+      <li><a href="index.html">Destinos</a></li>
+      <li><a href="itinerario.html">Itinerario</a></li>
+      <li><a href="sugerencias.html">Sugerencias</a></li>
+      <li><a href="perfil.html">Perfil</a></li>
+    </ul>
+  </header>
+  <main>
+    <section class="section-header">
+      <div class="container animated fadeInDown">
+        <h1 style="font-weight: 100; font-size: 3.5rem;">Explora Colombia</h1>
+        <p class="flow-text grey-text text-lighten-2">Planifica tu aventura con tecnología segura.</p>
+      </div>
+    </section>
+    <div class="container">
+      <h2>Destinos</h2>
+      <div id="loader">
+        <div class="preloader-wrapper active">
+          <div class="spinner-layer spinner-blue-only">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+              <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- consumo de api para js -->
+
+      <div class="row" id="destinos-container"></div>
+    </div>
+  </main>
+  <footer class="page-footer grey darken-4" style="border-top: 1px solid #333;">
+    <div class="footer-copyright">
+      <div class="container center-align">© 2026 TurisCol - Experiencia Segura en la Nube</div>
+    </div>
+  </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="prototipo_turismo/js/auth.js"></script>
+  <script src="prototipo_turismo/js/ui.js"></script>
+  <script src="prototipo_turismo/js/config.js"></script>
+  <script src="prototipo_turismo/js/app.js"></script>
+</body>
+
+</html>

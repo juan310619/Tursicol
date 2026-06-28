@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Itinerario - TurisCol</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="prototipo_turismo/css/style.css">
+</head>
+
+<body>
+  <header>
+    <nav>
+      <div class="nav-wrapper container">
+        <a href="index.html" class="brand-logo"><i class="material-icons">travel_explore</i>TurisCol</a>
+        <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="index.html">Destinos</a></li>
+          <li class="active"><a href="itinerario.html">Mi Itinerario</a></li>
+          <li><a href="sugerencias.html">Sugerencias</a></li>
+          <li><a href="perfil.html">Perfil</a></li>
+        </ul>
+      </div>
+    </nav>
+    <ul class="sidenav" id="mobile-nav">
+      <li><a href="index.html">Destinos</a></li>
+      <li class="active"><a href="itinerario.html">Mi Itinerario</a></li>
+      <li><a href="sugerencias.html">Sugerencias</a></li>
+      <li><a href="perfil.html">Perfil</a></li>
+    </ul>
+  </header>
+
+  <main class="container">
+    <h1 class="center-align" style="font-size: 2.5rem;">Crea tu Itinerario</h1>
+    <div class="row" id="itinerario-container">
+      <div class="col s12 m8 offset-m2">
+        <div class="form-container">
+          <form id="itinerario-form">
+
+
+            <div class="row">
+              <div class="input-field col s12 m6">
+                <i class="material-icons prefix">location_on</i>
+                <select id="destino-select">
+                  <option value="" disabled selected>Elige un destino</option>
+                  <option value="Antioquia">Antioquia</option>
+                  <option value="Bolívar">Bolívar</option>
+                  <option value="Cundinamarca">Cundinamarca</option>
+                  <option value="Caldas">Caldas</option>
+                </select>
+                <label>Destino Principal</label>
+              </div>
+
+              <div class="input-field col s12 m6">
+                <i class="material-icons prefix">group</i>
+                <input type="number" id="num-viajeros" min="1" value="1">
+                <label for="num-viajeros">Número de Viajeros</label>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="input-field col s12 m6">
+                <i class="material-icons prefix">event</i>
+                <input type="text" class="datepicker" id="fecha-ida">
+                <label for="fecha-ida">Fecha de Ida</label>
+              </div>
+
+              <div class="input-field col s12 m6">
+                <i class="material-icons prefix">event_busy</i>
+                <input type="text" class="datepicker" id="fecha-vuelta">
+                <label for="fecha-vuelta">Fecha de Vuelta</label>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="input-field col s12 m6">
+                <i class="material-icons prefix">payments</i>
+                <input type="number" id="presupuesto" placeholder="Ej: 500000">
+                <label for="presupuesto">Presupuesto Estimado (COP)</label>
+              </div>
+
+              <div class="input-field col s12 m6">
+                <i class="material-icons prefix">explore</i>
+                <select id="tipo-viaje">
+                  <option value="" disabled selected>Tipo de experiencia</option>
+                  <option value="Aventura">Aventura / Trekking</option>
+                  <option value="Relax">Relax / Descanso</option>
+                  <option value="Cultural">Cultural / Histórico</option>
+                  <option value="Negocios">Negocios</option>
+                  <option value="Gastronomico">Gastronómico</option>
+                </select>
+                <label>Estilo de Viaje</label>
+              </div>
+            </div>
+
+            <div class="input-field">
+              <i class="material-icons prefix">comment</i>
+              <textarea id="observaciones" class="materialize-textarea" data-length="200"></textarea>
+              <label for="observaciones">Notas adicionales u observaciones</label>
+            </div>
+
+            <input type="hidden" id="itinerary-id">
+
+            <button id="btn-save-itinerary" class="btn waves-effect waves-light w-100 teal darken-2" type="submit" name="action" style="margin-top: 20px;">
+              Guardar Mi Itinerario
+              <i class="material-icons right">save</i>
+            </button>
+            
+            <button id="btn-cancel-edit" class="btn-flat white-text waves-effect w-100" type="button" style="margin-top: 10px; display: none;" onclick="resetItineraryForm()">
+              Cancelar Edición
+            </button>
+
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <section class="container" style="margin-top: 50px; margin-bottom: 50px;">
+    <h3 class="center-align" style="font-weight: 300;">Mis Planes Guardados</h3>
+    <div id="itinerarios-list" class="row">
+        <!-- Se cargará vía JS -->
+        <p class="center-align grey-text">Cargando tus planes...</p>
+    </div>
+  </section>
+
+  <footer class="page-footer grey darken-4" style="border-top: 1px solid #333;">
+    <div class="footer-copyright">
+      <div class="container center-align">© 2026 TurisCol - Profesional</div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="prototipo_turismo/js/auth.js"></script>
+  <script src="prototipo_turismo/js/ui.js"></script>
+  <script>
+    if (!auth.isAuthenticated()) {
+        showAuthMessage('itinerario-container', '¡Planea tu Viaje!', 'Crea un itinerario personalizado, ajusta tus fechas y organiza tu presupuesto de forma segura.');
+    }
+  </script>
+  <script src="prototipo_turismo/js/app.js"></script>
+</body>
+
+</html>

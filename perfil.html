@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil - TurisCol</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="prototipo_turismo/css/style.css">
+</head>
+<body>
+    <header>
+        <nav><div class="nav-wrapper container"><a href="index.html" class="brand-logo"><i class="material-icons">travel_explore</i>TurisCol</a>
+        <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down"><li><a href="index.html">Destinos</a></li><li><a href="itinerario.html">Itinerario</a></li><li><a href="sugerencias.html">Sugerencias</a></li></ul></div></nav>
+        <ul class="sidenav" id="mobile-nav"><li><a href="index.html">Destinos</a></li><li><a href="itinerario.html">Itinerario</a></li><li><a href="sugerencias.html">Sugerencias</a></li></ul>
+    </header>
+
+    <main class="container">
+        <div class="row" style="margin-top: 40px;">
+            <div class="col s12 m4">
+                <div class="card center-align" style="padding: 20px;">
+                    <div style="width: 120px; height: 120px; background: #333; border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center;">
+                        <i class="material-icons white-text" style="font-size: 80px;">person</i>
+                    </div>
+                    <h5 id="userNameDisplay" style="margin: 0;">Cargando...</h5>
+                    <p id="userEmailDisplay" class="grey-text"></p>
+                    <br>
+                    <a href="#modalEdit" class="btn waves-effect waves-light teal btn-small modal-trigger" style="width: 100%; margin-bottom: 10px;">Editar Perfil</a>
+                    <a href="#modalPass" class="btn waves-effect waves-light orange darken-3 btn-small modal-trigger" style="width: 100%;">Cambiar Clave</a>
+                </div>
+            </div>
+            
+            <div class="col s12 m8">
+                <div class="card" style="min-height: 400px;">
+                    <div class="card-content">
+                        <span class="card-title"><i class="material-icons left">event_note</i>Mis Reservas Recientes</span>
+                        <div id="bookings-list" class="collection" style="border: none;">
+                            <p class="center-align grey-text" style="padding: 20px;">No tienes reservas aún.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Editar Perfil -->
+        <div id="modalEdit" class="modal">
+            <form id="editProfileForm">
+                <div class="modal-content"><h4>Editar Perfil</h4>
+                    <div class="input-field"><input id="editName" type="text" required><label for="editName">Nombre</label></div>
+                    <div class="input-field"><input id="editEmail" type="email" required><label for="editEmail">Correo</label></div>
+                </div>
+                <div class="modal-footer"><a href="#!" class="modal-close btn-flat">Cancelar</a><button type="submit" class="btn teal">Guardar</button></div>
+            </form>
+        </div>
+
+        <!-- Modal Cambiar Contraseña -->
+        <div id="modalPass" class="modal">
+            <form id="changePassForm">
+                <div class="modal-content"><h4>Seguridad</h4>
+                    <div class="input-field"><input id="currPass" type="password" required><label for="currPass">Contraseña Actual</label></div>
+                    <div class="input-field"><input id="newPass" type="password" required minlength="6"><label for="newPass">Nueva Contraseña</label></div>
+                </div>
+                <div class="modal-footer"><a href="#!" class="modal-close btn-flat">Cancelar</a><button type="submit" class="btn orange darken-3">Actualizar Clave</button></div>
+            </form>
+        </div>
+    </main>
+
+    <footer class="page-footer grey darken-4"><div class="footer-copyright"><div class="container center-align">© 2026 TurisCol - Profesional</div></div></footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="prototipo_turismo/js/auth.js"></script>
+    <script src="prototipo_turismo/js/ui.js"></script>
+    <script src="prototipo_turismo/js/profile.js"></script>
+</body>
+</html>

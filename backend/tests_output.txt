@@ -1,0 +1,15 @@
+  console.log
+    Conectado a la base de datos SQLite.
+
+      at Database.log (config/database.js:10:17)
+
+  console.log
+    Conectado a la base de datos SQLite.
+
+      at Database.log (config/database.js:10:17)
+
+  console.log
+    Conectado a la base de datos SQLite.
+
+      at Database.log (config/database.js:10:17)
+
