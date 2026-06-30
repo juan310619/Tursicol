@@ -1,7 +1,12 @@
 node_modules
 .env
 backend/.env
+backend/config/database.sqlite
+backend/config/suggestions.db
+backend/coverage/
+backend/tests_output.txt
 database.sqlite
+*.db
 .DS_Store
 dist
 build
