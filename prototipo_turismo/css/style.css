@@ -67,16 +67,43 @@ h1, h2, h3, h4, h5, h6 {
   text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
 }
 
+.input-field {
+  position: relative;
+}
+
 .input-field input, .input-field textarea {
   color: white !important;
 }
 
 .input-field label {
   color: var(--text-muted) !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
+  transition: transform .2s ease-out, color .2s ease-out;
+}
+
+.input-field label.active {
+  transform: translateY(-14px) scale(0.8);
 }
 
 .input-field input:focus + label, .input-field textarea:focus + label {
   color: var(--primary-color) !important;
+}
+
+.input-field .prefix {
+  position: absolute;
+  width: 3rem;
+}
+
+.input-field .prefix ~ input, .input-field .prefix ~ textarea {
+  margin-left: 3rem;
+  width: calc(100% - 3rem);
+}
+
+.input-field .prefix ~ label {
+  margin-left: 3rem;
 }
 
 .input-field .prefix {

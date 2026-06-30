@@ -17,7 +17,21 @@ const PORT = process.env.PORT || 3000;
 
 app.set('trust proxy', 1);
 
-app.use(helmet());
+app.use(helmet({
+    contentSecurityPolicy: {
+        directives: {
+            defaultSrc: ["'self'"],
+            scriptSrc: ["'self'", "'unsafe-inline'", "cdnjs.cloudflare.com"],
+            styleSrc: ["'self'", "'unsafe-inline'", "https:", "fonts.googleapis.com", "cdnjs.cloudflare.com"],
+            fontSrc: ["'self'", "https:", "data:", "fonts.gstatic.com", "fonts.googleapis.com"],
+            imgSrc: ["'self'", "data:"],
+            connectSrc: ["'self'"],
+            formAction: ["'self'"],
+            frameAncestors: ["'self'"],
+            upgradeInsecureRequests: [],
+        },
+    },
+}));
 app.use(cors());
 app.use(express.json());
 
