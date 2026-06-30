@@ -59,7 +59,16 @@
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script>try { if (typeof M !== 'undefined') { M.AutoInit(); M.updateTextFields(); } } catch(e){}</script>
+    <script>
+    try {
+        if (typeof M !== 'undefined') { M.AutoInit(); M.updateTextFields(); }
+    } catch(e){}
+    document.querySelectorAll('.input-field input, .input-field textarea').forEach(function(el) {
+        if (el.value) el.parentElement.querySelector('label')?.classList.add('active');
+        el.addEventListener('focus', function(){ this.parentElement.querySelector('label')?.classList.add('active'); });
+        el.addEventListener('blur', function(){ if(!this.value) this.parentElement.querySelector('label')?.classList.remove('active'); });
+    });
+    </script>
     <script src="prototipo_turismo/js/auth.js"></script>
     <script src="prototipo_turismo/js/ui.js"></script>
     <script>
