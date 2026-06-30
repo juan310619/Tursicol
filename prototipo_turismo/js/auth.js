@@ -1,5 +1,5 @@
 // Gestión de Autenticación TurisCol
-const API_URL = 'http://localhost:4000/api';
+const API_URL = '/api';
 
 const auth = {
     saveAuth(token, user) {
