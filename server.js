@@ -26,7 +26,8 @@ app.use(express.static(__dirname));
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000,
     max: 100,
-    message: "Demasiadas peticiones desde esta IP, por favor intente de nuevo más tarde."
+    message: "Demasiadas peticiones desde esta IP, por favor intente de nuevo más tarde.",
+    validate: { xForwardedForHeader: false }
 });
 app.use('/api/', limiter);
 
