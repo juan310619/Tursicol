@@ -1,6 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
-    M.AutoInit();
-    M.updateTextFields();
+    initApp();
+});
+
+function initApp() {
+    if (typeof M !== 'undefined') {
+        M.AutoInit();
+        M.updateTextFields();
+    }
     if (document.getElementById('destinos-container')) fetchDestinos();
     if (document.getElementById('itinerarios-list')) loadItineraries();
     if (document.getElementById('muro-sugerencias')) loadSuggestionsMuro();
@@ -10,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const suggForm = document.getElementById('sugerencia-form');
     if (suggForm) suggForm.addEventListener('submit', handleSuggestionSubmit);
-});
+}
 
 
 const getDestinoImage = (name) => {

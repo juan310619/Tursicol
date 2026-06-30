@@ -21,10 +21,6 @@ app.use(express.json());
 
 app.use(express.static(__dirname));
 
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
-});
-
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000,
     max: 100,
