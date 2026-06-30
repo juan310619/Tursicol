@@ -110,9 +110,21 @@ async function handleBooking(dest, plan, price) {
 async function handleItinerarySubmit(e) {
     e.preventDefault();
     const id = document.getElementById('itinerary-id').value;
+    const fechaIda = document.getElementById('fecha-ida').value;
+    if (fechaIda) {
+        const hoy = new Date();
+        hoy.setHours(0, 0, 0, 0);
+        const fechaSeleccionada = new Date(fechaIda + 'T00:00:00');
+        if (fechaSeleccionada < hoy) {
+            if (typeof M !== 'undefined' && M.toast) {
+                M.toast({ html: 'La fecha de ida debe ser igual o posterior a hoy', classes: 'red' });
+            }
+            return;
+        }
+    }
     const data = {
         destino: document.getElementById('destino-select').value,
-        fecha_ida: document.getElementById('fecha-ida').value,
+        fecha_ida: fechaIda,
         fecha_vuelta: document.getElementById('fecha-vuelta').value || "NR",
         num_viajeros: parseInt(document.getElementById('num-viajeros').value) || 1,
         presupuesto_estimado: parseFloat(document.getElementById('presupuesto').value) || 0,

@@ -1,7 +1,19 @@
 // Gestión de Interfaz Dinámica TurisCol
 document.addEventListener('DOMContentLoaded', () => {
     updateNavbar();
+    initFormLabels();
 });
+
+function initFormLabels() {
+    document.querySelectorAll('.input-field input, .input-field textarea, .input-field select').forEach(function(el) {
+        const label = el.parentElement.querySelector('label');
+        if (!label) return;
+        if (el.value) label.classList.add('active');
+        el.addEventListener('focus', function(){ label.classList.add('active'); });
+        el.addEventListener('blur', function(){ if(!this.value) label.classList.remove('active'); });
+        el.addEventListener('change', function(){ if(this.value) label.classList.add('active'); else label.classList.remove('active'); });
+    });
+}
 
 function updateNavbar() {
     const navWrappers = document.querySelectorAll('.nav-wrapper ul.right, .sidenav');
