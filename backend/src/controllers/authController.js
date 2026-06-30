@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
 
-const SECRET_KEY = process.env.JWT_SECRET;
+const SECRET_KEY = process.env.JWT_SECRET || 'turiscol_fallback_secret_key_2026';
 
 class AuthController {
     static async login(req, res) {

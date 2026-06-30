@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const SECRET_KEY = process.env.JWT_SECRET;
+const SECRET_KEY = process.env.JWT_SECRET || 'turiscol_fallback_secret_key_2026';
 
 function verifyToken(req, res, next) {
     const authHeader = req.headers['authorization'];
