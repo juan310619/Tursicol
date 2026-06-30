@@ -13,8 +13,16 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-const getStableImage = (id) => {
-    return `https://loremflickr.com/800/600/colombia,landscape,city?lock=${id}`;
+const getDestinoImage = (name) => {
+    const imageMap = {
+        "Antioquia": "antioquia.png",
+        "Atlántico": "atlantico.jpg",
+        "Bolívar": "bolivar.png",
+        "Cesar": "cesar.jpg",
+        "Magdalena": "magdalena.png"
+    };
+    const file = imageMap[name] || "default.png";
+    return `prototipo_turismo/img/${file}`;
 };
 
 async function fetchDestinos() {
@@ -33,13 +41,13 @@ async function fetchDestinos() {
 
         container.innerHTML = '';
         filtered.forEach(dept => {
-            const img = getStableImage(dept.id);
+            const img = getDestinoImage(dept.name);
             container.innerHTML += `
                 <div class="col s12 m6 l4">
                     <div class="card hoverable z-depth-3" style="background: #1e1e1e; border-radius: 12px; margin-bottom: 30px;">
                         <div class="card-image">
                             <img src="${img}" alt="${dept.name}" style="height: 250px; object-fit: cover; border-radius: 12px 12px 0 0;" 
-                                 onerror="this.src='https://placehold.co/800x600/1e1e1e/white?text=${dept.name}'">
+                                 onerror="this.src='prototipo_turismo/img/default.png'">
                             <span class="card-title" style="background: rgba(0,0,0,0.6); width: 100%; font-weight: bold; padding: 15px !important;">${dept.name}</span>
                         </div>
                         <div class="card-action" style="border-top: none; padding: 15px;">

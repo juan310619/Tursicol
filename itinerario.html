@@ -140,6 +140,10 @@
     if (!auth.isAuthenticated()) {
         showAuthMessage('itinerario-container', '¡Planea tu Viaje!', 'Crea un itinerario personalizado, ajusta tus fechas y organiza tu presupuesto de forma segura.');
     }
+    document.addEventListener('DOMContentLoaded', function() {
+        M.AutoInit();
+        M.updateTextFields();
+    });
   </script>
   <script src="prototipo_turismo/js/app.js"></script>
 </body>

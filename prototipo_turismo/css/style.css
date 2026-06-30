@@ -79,6 +79,66 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--primary-color) !important;
 }
 
+.input-field .prefix {
+  color: var(--text-muted) !important;
+}
+
+.input-field .prefix.active {
+  color: var(--primary-color) !important;
+}
+
+.dropdown-content {
+  background-color: #252525 !important;
+}
+
+.dropdown-content li > span {
+  color: white !important;
+}
+
+.dropdown-content li:hover {
+  background-color: #333 !important;
+}
+
+.select-wrapper input.select-dropdown {
+  color: white !important;
+  border-bottom: 1px solid #555 !important;
+}
+
+.select-wrapper .caret {
+  fill: var(--text-muted) !important;
+}
+
+.form-container {
+  background: var(--bg-card);
+  padding: 30px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.05);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  margin-top: 30px;
+}
+
+.datepicker-date-display {
+  background-color: var(--primary-color) !important;
+}
+
+.datepicker-table td.is-today {
+  color: var(--primary-color) !important;
+}
+
+.datepicker-table td.is-selected {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+}
+
+.datepicker-controls .select-month input {
+  color: white !important;
+}
+
+[type="checkbox"]:checked + span:not(.lever):before {
+  border-right: 2px solid var(--primary-color) !important;
+  border-bottom: 2px solid var(--primary-color) !important;
+}
+
 .collection {
   border: none;
   background: transparent;
