@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
     M.AutoInit();
+    M.updateTextFields();
     if (document.getElementById('destinos-container')) fetchDestinos();
     if (document.getElementById('itinerarios-list')) loadItineraries();
     if (document.getElementById('muro-sugerencias')) loadSuggestionsMuro();
 
-    // Attach form listeners if they exist
     const itinForm = document.getElementById('itinerario-form');
     if (itinForm) itinForm.addEventListener('submit', handleItinerarySubmit);
 
@@ -25,46 +25,45 @@ const getDestinoImage = (name) => {
     return `prototipo_turismo/img/${file}`;
 };
 
-async function fetchDestinos() {
+const DEPARTAMENTOS = [
+    { id: 1, name: "Amazonas" },
+    { id: 2, name: "Antioquia" },
+    { id: 3, name: "Arauca" },
+    { id: 4, name: "Atlántico" },
+    { id: 5, name: "Bolívar" },
+    { id: 12, name: "Cesar" },
+    { id: 13, name: "Chocó" },
+    { id: 20, name: "Magdalena" },
+    { id: 21, name: "Meta" }
+];
+
+function fetchDestinos() {
     const container = document.getElementById('destinos-container');
     const loader = document.getElementById('loader');
+    if (loader) loader.style.display = 'none';
+    if (!container) return;
 
-    try {
-        const response = await fetch('https://api-colombia.com/api/v1/Department');
-        const departments = await response.json();
-
-        // Quitar el loader pase lo que pase
-        if (loader) loader.setAttribute('style', 'display:none !important');
-
-        const idsInteres = [1, 2, 4, 3, 5, 12, 13, 21, 20];
-        const filtered = departments.filter(d => idsInteres.includes(d.id));
-
-        container.innerHTML = '';
-        filtered.forEach(dept => {
-            const img = getDestinoImage(dept.name);
-            container.innerHTML += `
-                <div class="col s12 m6 l4">
-                    <div class="card hoverable z-depth-3" style="background: #1e1e1e; border-radius: 12px; margin-bottom: 30px;">
-                        <div class="card-image">
-                            <img src="${img}" alt="${dept.name}" style="height: 250px; object-fit: cover; border-radius: 12px 12px 0 0;" 
-                                 onerror="this.src='prototipo_turismo/img/default.png'">
-                            <span class="card-title" style="background: rgba(0,0,0,0.6); width: 100%; font-weight: bold; padding: 15px !important;">${dept.name}</span>
-                        </div>
-                        <div class="card-action" style="border-top: none; padding: 15px;">
-                            <button onclick="openDestinoModal(${dept.id}, '${dept.name}')" 
-                                    class="btn orange darken-3 waves-effect waves-light" 
-                                    style="width: 100%; border-radius: 8px; font-weight: bold;">
-                                <i class="material-icons left">explore</i> VER DETALLES
-                            </button>
-                        </div>
+    container.innerHTML = '';
+    DEPARTAMENTOS.forEach(dept => {
+        const img = getDestinoImage(dept.name);
+        container.innerHTML += `
+            <div class="col s12 m6 l4">
+                <div class="card hoverable z-depth-3" style="background: #1e1e1e; border-radius: 12px; margin-bottom: 30px;">
+                    <div class="card-image">
+                        <img src="${img}" alt="${dept.name}" style="height: 250px; object-fit: cover; border-radius: 12px 12px 0 0;" 
+                             onerror="this.src='prototipo_turismo/img/default.png'">
+                        <span class="card-title" style="background: rgba(0,0,0,0.6); width: 100%; font-weight: bold; padding: 15px !important;">${dept.name}</span>
                     </div>
-                </div>`;
-        });
-    } catch (error) {
-        console.error('Error Destinos:', error);
-        if (loader) loader.style.display = 'none';
-        if (container) container.innerHTML = '<p class="center white-text">No se pudieron cargar los destinos. Verifica tu conexión.</p>';
-    }
+                    <div class="card-action" style="border-top: none; padding: 15px;">
+                        <button onclick="openDestinoModal(${dept.id}, '${dept.name}')" 
+                                class="btn orange darken-3 waves-effect waves-light" 
+                                style="width: 100%; border-radius: 8px; font-weight: bold;">
+                            <i class="material-icons left">explore</i> VER DETALLES
+                        </button>
+                    </div>
+                </div>
+            </div>`;
+    });
 }
 
 function openDestinoModal(id, name) {
