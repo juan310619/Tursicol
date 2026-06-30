@@ -80,12 +80,17 @@ h1, h2, h3, h4, h5, h6 {
   position: absolute;
   top: 0;
   left: 0;
-  transform-origin: 0 0;
+  font-size: 1rem;
+  cursor: text;
   transition: transform .2s ease-out, color .2s ease-out;
+  transform-origin: 0% 100%;
+  transform: translateY(12px);
+  pointer-events: none;
 }
 
 .input-field label.active {
   transform: translateY(-14px) scale(0.8);
+  transform-origin: 0 0;
 }
 
 .input-field input:focus + label, .input-field textarea:focus + label {
