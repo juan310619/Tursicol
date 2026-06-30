@@ -35,6 +35,24 @@
     <p class="center-align grey-text">Comparte lugares mágicos de Colombia que otros viajeros deban conocer.</p>
 
     <div class="row" id="sugerencia-container" style="margin-top: 40px;">
+      <div id="auth-message-sugerencia" class="col s12 center-align animated fadeIn auth-message-card" style="padding: 60px 20px; border-radius: 20px; margin-top: 30px;">
+        <div style="background: #004d40; width: 100px; height: 100px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+          <i class="material-icons large white-text">explore</i>
+        </div>
+        <h3 class="white-text" style="font-weight: 300;">¡Comparte tus Rincones!</h3>
+        <p class="grey-text text-lighten-1" style="font-size: 1.2rem; max-width: 600px; margin: 0 auto 40px;">
+          Ayúdanos a descubrir lugares mágicos. Regístrate para enviar tus recomendaciones y colaborar con otros viajeros.
+        </p>
+        <div class="row" style="max-width: 500px; margin: 0 auto;">
+          <div class="col s12 m6">
+            <a href="login.html" class="btn-large waves-effect waves-light teal darken-1 btn-block" style="width: 100%;">Iniciar Sesión</a>
+          </div>
+          <div class="col s12 m6">
+            <a href="registro.html" class="btn-large waves-effect waves-light orange darken-3 btn-block" style="width: 100%;">Crear Cuenta</a>
+          </div>
+        </div>
+      </div>
+      <div id="form-sugerencia" style="display:none;">
       <div class="col s12 m8 offset-m2">
         <div class="form-container">
           <form id="sugerencia-form">
@@ -68,6 +86,7 @@
 
         </div>
       </div>
+      </div>
     </div>
   </main>
 
@@ -87,9 +106,14 @@
   <script src="prototipo_turismo/js/auth.js"></script>
   <script src="prototipo_turismo/js/ui.js"></script>
   <script>
-    if (!auth.isAuthenticated()) {
-        showAuthMessage('sugerencia-container', '¡Comparte tus Rincones!', 'Ayúdanos a descubrir lugares mágicos. Regístrate para enviar tus recomendaciones y colaborar con otros viajeros.');
-    }
+    (function() {
+      try {
+        if (typeof auth !== 'undefined' && auth.isAuthenticated && auth.isAuthenticated()) {
+          document.getElementById('auth-message-sugerencia').style.display = 'none';
+          document.getElementById('form-sugerencia').style.display = 'block';
+        }
+      } catch(e) {}
+    })();
   </script>
   <script src="prototipo_turismo/js/app.js"></script>
 </body>
