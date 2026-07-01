@@ -11,7 +11,7 @@ class SuggestionController {
             }
 
             const newDoc = await Suggestion.create(user_id, nombre_lugar, ubicacion, descripcion);
-            res.status(201).json({ message: "Sugerencia enviada a base de datos NoSQL", id: newDoc._id });
+            res.status(201).json({ message: "Sugerencia enviada para revisión", id: newDoc._id });
         } catch (error) {
             res.status(500).json({ error: error.message });
         }
@@ -20,6 +20,15 @@ class SuggestionController {
     static async getAllSuggestions(req, res) {
         try {
             const suggestions = await Suggestion.findAll();
+            res.json(suggestions);
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
+    }
+
+    static async getApprovedSuggestions(req, res) {
+        try {
+            const suggestions = await Suggestion.findApproved();
             res.json(suggestions);
         } catch (error) {
             res.status(500).json({ error: error.message });

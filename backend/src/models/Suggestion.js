@@ -12,6 +12,7 @@ class Suggestion {
             nombre_lugar,
             ubicacion,
             descripcion,
+            status: 'pending',
             createdAt: new Date()
         };
         return await db.insert(newSuggestion);
@@ -21,15 +22,25 @@ class Suggestion {
         return await db.find({}).sort({ createdAt: -1 });
     }
 
+    static async findApproved() {
+        const all = await db.find({}).sort({ createdAt: -1 });
+        return all.filter(s => s.status !== 'pending');
+    }
+
     static async findByUserId(user_id) {
         return await db.find({ user_id });
     }
 
     static async update(id, data) {
-        const { nombre_lugar, ubicacion, descripcion } = data;
+        const updateFields = {};
+        if (data.nombre_lugar !== undefined) updateFields.nombre_lugar = data.nombre_lugar;
+        if (data.ubicacion !== undefined) updateFields.ubicacion = data.ubicacion;
+        if (data.descripcion !== undefined) updateFields.descripcion = data.descripcion;
+        if (data.status !== undefined) updateFields.status = data.status;
+        updateFields.updatedAt = new Date();
         return await db.update(
             { _id: id },
-            { $set: { nombre_lugar, ubicacion, descripcion, updatedAt: new Date() } }
+            { $set: updateFields }
         );
     }
 

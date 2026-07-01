@@ -226,15 +226,27 @@ async function loadSuggestionsMuro() {
     const isAdmin = user && user.role === 'admin';
 
     try {
-        const res = await auth.fetch('/suggestions');
+        const url = isAdmin ? '/suggestions/all' : '/suggestions';
+        const res = await auth.fetch(url);
         if (res.ok) {
             const items = await res.json();
             muro.innerHTML = '';
             items.reverse().forEach(s => {
+                let statusBadge = '';
                 let adminButtons = '';
                 if (isAdmin) {
+                    const statusClass = s.status === 'approved' ? 'green-text' : 'orange-text';
+                    const statusText = s.status === 'approved' ? 'Aprobada' : 'Pendiente';
+                    statusBadge = `<span class="${statusClass}" style="font-size: 0.8rem; font-weight: 300; margin-left: 10px;">(${statusText})</span>`;
+
+                    const approveBtn = s.status !== 'approved'
+                        ? `<button onclick="approveSuggestion('${s._id}')" class="btn-small green waves-effect waves-light" style="border-radius: 4px; margin-right: 10px;">
+                             <i class="material-icons left">check</i>Aprobar
+                           </button>`
+                        : '';
                     adminButtons = `
                     <div class="card-action" style="background: rgba(0,0,0,0.2); border-top: 1px solid rgba(255,255,255,0.1);">
+                        ${approveBtn}
                         <button onclick="prepareEditSuggestion(${JSON.stringify(s).replace(/"/g, '&quot;')})" class="btn-small teal waves-effect waves-light" style="border-radius: 4px; margin-right: 10px;">
                             <i class="material-icons left">edit</i>Editar
                         </button>
@@ -248,7 +260,9 @@ async function loadSuggestionsMuro() {
                 <div class="col s12 m6">
                     <div class="card grey darken-4 white-text z-depth-2" style="border-radius: 8px; overflow: hidden;">
                         <div class="card-content">
-                            <span class="card-title orange-text" style="font-size: 1.2rem; font-weight: bold;">${s.nombre_lugar}</span>
+                            <span class="card-title orange-text" style="font-size: 1.2rem; font-weight: bold;">
+                                ${s.nombre_lugar}${statusBadge}
+                            </span>
                             <p class="teal-text text-lighten-2" style="font-size: 0.9rem; margin-bottom: 10px;">
                                 <i class="material-icons tiny left">location_on</i> ${s.ubicacion}
                             </p>
@@ -276,7 +290,8 @@ async function handleSuggestionSubmit(e) {
         const url = id ? `/suggestions/${id}` : '/suggestions';
         const res = await auth.fetch(url, { method, body: JSON.stringify(data) });
         if (res.ok) {
-            M.toast({ html: id ? '¡Sugerencia Actualizada!' : '¡Sugerencia recibida!' });
+            const msg = id ? '¡Sugerencia Actualizada!' : 'La administración revisará tu sugerencia';
+            M.toast({ html: msg });
             resetSugerenciaForm();
             loadSuggestionsMuro();
         }
@@ -304,6 +319,19 @@ function resetSugerenciaForm() {
     document.getElementById('btn-save-sugerencia').innerHTML = 'Enviar Sugerencia <i class="material-icons right">send</i>';
     document.getElementById('btn-cancel-sugg').style.display = 'none';
     M.updateTextFields();
+}
+
+async function approveSuggestion(id) {
+    try {
+        const res = await auth.fetch(`/suggestions/${id}`, {
+            method: 'PUT',
+            body: JSON.stringify({ status: 'approved' })
+        });
+        if (res.ok) {
+            M.toast({ html: 'Sugerencia aprobada', classes: 'green' });
+            loadSuggestionsMuro();
+        }
+    } catch (err) { console.error(err); }
 }
 
 async function deleteSuggestion(id) {
