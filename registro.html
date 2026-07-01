@@ -57,7 +57,7 @@
                     M.toast({html: 'Registro exitoso!', classes: 'green'});
                     setTimeout(() => window.location.href = 'login.html', 1500);
                 } else {
-                    const msg = data.errors ? data.errors[0].msg : (data.message || 'Error');
+                    const msg = data.errors ? data.errors[0].msg : (data.message || data.error || 'Error');
                     M.toast({html: msg, classes: 'red'});
                 }
             } catch (err) { M.toast({html: 'Error de conexión: Revisa si el servidor está corriendo', classes: 'red'}); }

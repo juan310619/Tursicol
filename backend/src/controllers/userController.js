@@ -30,7 +30,10 @@ class UserController {
             const newUserId = await User.create(name, email, password);
             res.status(201).json({ message: "Usuario creado exitosamente", userId: newUserId });
         } catch (error) {
-            res.status(500).json({ error: "No se pudo crear el usuario o el email ya existe" });
+            if (error.message && error.message.includes('UNIQUE constraint failed')) {
+                return res.status(409).json({ message: "El correo electrónico ya está registrado" });
+            }
+            res.status(500).json({ message: "Error al crear el usuario" });
         }
     }
 
