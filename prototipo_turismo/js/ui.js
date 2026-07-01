@@ -39,9 +39,9 @@ function updateNavbar() {
             nav.querySelectorAll('a[href="itinerario.html"], a[href="sugerencias.html"], a[href="perfil.html"]').forEach(a => {
                 a.parentElement.style.display = 'block';
             });
-        } else {
+        } else if (!window.location.pathname.includes('login.html') && !window.location.pathname.includes('registro.html')) {
             let loginHtml = `
-                <li class="dynamic-nav ${window.location.pathname.includes('login.html') ? 'active' : ''}">
+                <li class="dynamic-nav">
                     <a href="login.html" class="teal-text text-lighten-4"><i class="material-icons left">login</i>Entrar</a>
                 </li>`;
             nav.insertAdjacentHTML('beforeend', loginHtml);
