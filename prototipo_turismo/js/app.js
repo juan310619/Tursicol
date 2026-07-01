@@ -4,6 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function initApp() {
     if (typeof M !== 'undefined') {
+        M.Datepicker.defaults.format = 'yyyy-mm-dd';
+        M.Datepicker.defaults.minDate = new Date();
+        M.Datepicker.defaults.autoClose = true;
         M.AutoInit();
         M.updateTextFields();
     }
