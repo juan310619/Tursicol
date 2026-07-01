@@ -125,13 +125,19 @@ async function handleItinerarySubmit(e) {
             return;
         }
     }
+    const destino = document.getElementById('destino-select').value;
+    const tipoViaje = document.getElementById('tipo-viaje').value;
+    if (!destino || !tipoViaje) {
+        M.toast({ html: 'Faltan datos obligatorios: destino y tipo de viaje', classes: 'red' });
+        return;
+    }
     const data = {
-        destino: document.getElementById('destino-select').value,
+        destino,
         fecha_ida: fechaIda,
         fecha_vuelta: document.getElementById('fecha-vuelta').value || "NR",
         num_viajeros: parseInt(document.getElementById('num-viajeros').value) || 1,
         presupuesto_estimado: parseFloat(document.getElementById('presupuesto').value) || 0,
-        tipo_viaje: document.getElementById('tipo-viaje').value,
+        tipo_viaje: tipoViaje,
         observaciones: document.getElementById('observaciones').value
     };
     try {
