@@ -24,13 +24,13 @@ function initApp() {
 
 const getDestinoImage = (name) => {
     const imageMap = {
-        "Antioquia": "antioquia.png",
-        "Atlántico": "atlantico.jpg",
-        "Bolívar": "bolivar.png",
-        "Cesar": "cesar.jpg",
-        "Magdalena": "magdalena.png"
+        "Antioquia": "antioquia.webp",
+        "Atlántico": "atlantico.webp",
+        "Bolívar": "bolivar.webp",
+        "Cesar": "cesar.webp",
+        "Magdalena": "magdalena.webp"
     };
-    const file = imageMap[name] || "default.png";
+    const file = imageMap[name] || "default.webp";
     return `prototipo_turismo/img/${file}`;
 };
 
@@ -60,7 +60,7 @@ function fetchDestinos() {
                 <div class="card hoverable z-depth-3" style="background: #1e1e1e; border-radius: 12px; margin-bottom: 30px;">
                     <div class="card-image">
                         <img src="${img}" alt="${dept.name}" style="height: 250px; object-fit: cover; border-radius: 12px 12px 0 0;" 
-                             onerror="this.src='prototipo_turismo/img/default.png'">
+                             onerror="this.src='prototipo_turismo/img/default.webp'">
                         <span class="card-title" style="background: rgba(0,0,0,0.6); width: 100%; font-weight: bold; padding: 15px !important;">${dept.name}</span>
                     </div>
                     <div class="card-action" style="border-top: none; padding: 15px;">

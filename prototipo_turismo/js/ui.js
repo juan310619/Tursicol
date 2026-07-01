@@ -66,7 +66,7 @@ function showAuthMessage(containerId, title = "¡Comienza tu Aventura!", message
             <p class="grey-text text-lighten-1" style="font-size: 1.2rem; max-width: 600px; margin: 0 auto 40px;">
                 ${message}
             </p>
-            <div class="row" style="max-width: 500px; margin: 0 auto;">
+            <div class="row auth-btn-container" style="max-width: 500px; margin: 0 auto;">
                 <div class="col s12 m6">
                     <a href="login.html" class="btn-large waves-effect waves-light teal darken-1 btn-block" style="width: 100%;">Iniciar Sesión</a>
                 </div>
