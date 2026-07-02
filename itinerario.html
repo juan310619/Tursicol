@@ -136,7 +136,7 @@
     </div>
   </main>
 
-  <section class="container" style="margin-top: 50px; margin-bottom: 50px;">
+  <section id="mis-planes-section" class="container" style="margin-top: 50px; margin-bottom: 50px; display:none;">
     <h3 class="center-align" style="font-weight: 300;">Mis Planes Guardados</h3>
     <div id="itinerarios-list" class="row">
         <!-- Se cargará vía JS -->
@@ -159,6 +159,9 @@
         if (typeof auth !== 'undefined' && auth.isAuthenticated && auth.isAuthenticated()) {
           document.getElementById('auth-message-itinerario').style.display = 'none';
           document.getElementById('form-itinerario').style.display = 'block';
+          document.getElementById('mis-planes-section').style.display = 'block';
+        } else {
+          document.getElementById('mis-planes-section').style.display = 'none';
         }
       } catch(e) {}
     })();
