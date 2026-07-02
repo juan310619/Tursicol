@@ -40,9 +40,10 @@ function updateNavbar() {
                 a.parentElement.style.display = 'block';
             });
         } else if (!window.location.pathname.includes('login.html') && !window.location.pathname.includes('registro.html')) {
+            const page = window.location.pathname.split('/').pop() || 'index.html';
             let loginHtml = `
                 <li class="dynamic-nav">
-                    <a href="login.html" class="teal-text text-lighten-4"><i class="material-icons left">login</i>Entrar</a>
+                    <a href="login.html?redirect=${encodeURIComponent(page)}" class="teal-text text-lighten-4"><i class="material-icons left">login</i>Entrar</a>
                 </li>`;
             nav.insertAdjacentHTML('beforeend', loginHtml);
 
@@ -57,6 +58,10 @@ function showAuthMessage(containerId, title = "¡Comienza tu Aventura!", message
     const container = document.getElementById(containerId);
     if (!container) return;
 
+    const page = window.location.pathname.split('/').pop() || 'index.html';
+    const loginUrl = `login.html?redirect=${encodeURIComponent(page)}`;
+    const registerUrl = `registro.html?redirect=${encodeURIComponent(page)}`;
+
     container.innerHTML = `
         <div class="col s12 center-align animated fadeIn auth-message-card" style="padding: 60px 20px; border-radius: 20px; margin-top: 30px;">
             <div style="background: #004d40; width: 100px; height: 100px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
@@ -68,10 +73,10 @@ function showAuthMessage(containerId, title = "¡Comienza tu Aventura!", message
             </p>
             <div class="row auth-btn-container" style="max-width: 500px; margin: 0 auto;">
                 <div class="col s12 m6">
-                    <a href="login.html" class="btn-large waves-effect waves-light teal darken-1 btn-block" style="width: 100%;">Iniciar Sesión</a>
+                    <a href="${loginUrl}" class="btn-large waves-effect waves-light teal darken-1 btn-block" style="width: 100%;">Iniciar Sesión</a>
                 </div>
                 <div class="col s12 m6">
-                    <a href="registro.html" class="btn-large waves-effect waves-light orange darken-3 btn-block" style="width: 100%;">Crear Cuenta</a>
+                    <a href="${registerUrl}" class="btn-large waves-effect waves-light orange darken-3 btn-block" style="width: 100%;">Crear Cuenta</a>
                 </div>
             </div>
         </div>

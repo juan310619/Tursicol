@@ -17,7 +17,7 @@
         <nav><div class="nav-wrapper container">
             <a href="index.html" class="brand-logo hide-on-small-only"><i class="material-icons">travel_explore</i>TurisCol</a>
             <a href="index.html" class="brand-logo show-on-small hide-on-med-and-up" style="font-size: 1.2rem;"><i class="material-icons">travel_explore</i>TurisCol</a>
-            <a href="index.html" style="position: absolute; right: 15px; top: 0; line-height: 56px; color: white; font-size: 24px;"><i class="material-icons">close</i></a>
+            <a href="index.html" id="close-btn" style="position: absolute; right: 15px; top: 0; line-height: 56px; color: white; font-size: 24px;"><i class="material-icons">close</i></a>
             <ul class="right"></ul>
         </div></nav>
     </header>
@@ -31,7 +31,7 @@
                 <div class="input-field"><i class="material-icons prefix">lock</i><input id="password" type="password" class="validate" required minlength="6"><label for="password">Contraseña (mín. 6)</label></div>
                 <button class="btn waves-effect waves-light w-100 orange darken-2" type="submit" style="width: 100%; margin-top: 1rem;">Registrarse</button>
             </form>
-            <p class="center-align" style="margin-top: 2rem;">¿Ya tienes cuenta? <a href="login.html" class="teal-text">Inicia Sesión</a></p>
+            <p class="center-align" style="margin-top: 2rem;">¿Ya tienes cuenta? <a href="login.html" class="teal-text" id="login-link">Inicia Sesión</a></p>
         </div>
     </main>
     <footer class="page-footer grey darken-4"><div class="footer-copyright"><div class="container center-align">© 2026 TurisCol</div></div></footer>
@@ -45,27 +45,30 @@
         el.addEventListener('focus', function(){ this.parentElement.querySelector('label')?.classList.add('active'); });
         el.addEventListener('blur', function(){ if(!this.value) this.parentElement.querySelector('label')?.classList.remove('active'); });
     });
-    </script>
-    <script src="prototipo_turismo/js/auth.js"></script>
-    <script src="prototipo_turismo/js/ui.js"></script>
-    <script>
-        document.getElementById('register-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            try {
-                const res = await auth.fetch('/users', { method: 'POST', body: JSON.stringify({ name, email, password }) });
-                const data = await res.json();
-                if (res.ok) {
-                    M.toast({html: 'Registro exitoso!', classes: 'green'});
-                    setTimeout(() => window.location.href = 'login.html', 1500);
-                } else {
-                    const msg = data.errors ? data.errors[0].msg : (data.message || data.error || 'Error');
-                    M.toast({html: msg, classes: 'red'});
-                }
-            } catch (err) { M.toast({html: 'Error de conexión: Revisa si el servidor está corriendo', classes: 'red'}); }
-        });
+
+    const params = new URLSearchParams(window.location.search);
+    const redirect = params.get('redirect') || 'index.html';
+    document.getElementById('close-btn').href = redirect;
+
+    document.getElementById('login-link').href = `login.html?redirect=${encodeURIComponent(redirect)}`;
+
+    document.getElementById('register-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        try {
+            const res = await auth.fetch('/users', { method: 'POST', body: JSON.stringify({ name, email, password }) });
+            const data = await res.json();
+            if (res.ok) {
+                M.toast({html: 'Registro exitoso!', classes: 'green'});
+                setTimeout(() => window.location.href = `login.html?redirect=${encodeURIComponent(redirect)}`, 1500);
+            } else {
+                const msg = data.errors ? data.errors[0].msg : (data.message || data.error || 'Error');
+                M.toast({html: msg, classes: 'red'});
+            }
+        } catch (err) { M.toast({html: 'Error de conexión: Revisa si el servidor está corriendo', classes: 'red'}); }
+    });
     </script>
 </body>
 </html>
