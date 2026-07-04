@@ -28,7 +28,7 @@
             <form id="register-form">
                 <div class="input-field"><i class="material-icons prefix">person</i><input id="name" type="text" class="validate" required><label for="name">Nombre Completo</label></div>
                 <div class="input-field"><i class="material-icons prefix">email</i><input id="email" type="email" class="validate" required><label for="email">Correo Electrónico</label></div>
-                <div class="input-field"><i class="material-icons prefix">lock</i><input id="password" type="password" class="validate" required minlength="6"><label for="password">Contraseña (mín. 6)</label></div>
+                <div class="input-field"><i class="material-icons prefix">lock</i><input id="password" type="password" class="validate" required minlength="6"><label for="password">Contraseña (mín. 6)</label><i id="toggle-pass" class="material-icons" style="position:absolute;right:0;top:1rem;cursor:pointer;user-select:none">visibility</i></div>
                 <button class="btn waves-effect waves-light w-100 orange darken-2" type="submit" style="width: 100%; margin-top: 1rem;">Registrarse</button>
             </form>
             <p class="center-align" style="margin-top: 2rem;">¿Ya tienes cuenta? <a href="login.html" class="teal-text" id="login-link">Inicia Sesión</a></p>
@@ -52,6 +52,12 @@
     document.getElementById('close-btn').href = redirect;
 
     document.getElementById('login-link').href = `login.html?redirect=${encodeURIComponent(redirect)}`;
+
+    document.getElementById('toggle-pass')?.addEventListener('click', function() {
+        const input = document.getElementById('password');
+        input.type = input.type === 'password' ? 'text' : 'password';
+        this.textContent = input.type === 'password' ? 'visibility' : 'visibility_off';
+    });
 
     document.getElementById('register-form').addEventListener('submit', async (e) => {
         e.preventDefault();
